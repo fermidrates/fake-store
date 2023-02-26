@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 
 import modifyCart from "@/helpers/modifyCart";
 
-import { CartContext } from "@/context/CartContext";
+import { CartContext } from "@/context/cartContext";
 
 import { BASE_PRODUCT_URL } from "@/constants";
 

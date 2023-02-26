@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { CartContext } from "@/context/CartContext";
+import { CartContext } from "@/context/cartContext";
 
 import "@/styles/globals.css";
 
