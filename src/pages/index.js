@@ -53,10 +53,12 @@ const Home = () => {
         <div className="p-4 grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-6">
           {products?.map((product) => {
             return (
-              <ProductCard
-                data={product}
-                onButtonClick={(e) => handleAddToCart(e, product.id)}
-              />
+              <div key={product.id}>
+                <ProductCard
+                  data={product}
+                  onButtonClick={(e) => handleAddToCart(e, product.id)}
+                />
+              </div>
             );
           })}
         </div>

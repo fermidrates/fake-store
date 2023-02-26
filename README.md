@@ -36,3 +36,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Overview
+
+[`fake-store`] simulates a simple e-commerce UI, consisted of a home page, detail page and cart page, using data from [`FakeStoreAPI`](https://fakestoreapi.com).
+
+- Home page: consists of products, which clickable on the card to go to detail page, or on the button to add items to cart.
+
+- Detail page: consists of product chosen from home page, which clickable on the button to add items to cart.
+
+- Cart page: consists of products inside the cart. Each product has their own quantity, which can be manipulated by add / subtract button. This function is enabled by state management via application of [`useContext`]
+
+Overall, [`fake-store`] purely uses [`TailwindCSS`] for styling purposes.
+
+## Tech Stack
+
+- Javascript
+
+- React
+
+- NextJS
+
+- TailwindCSS
+
+## Deployment
+
+Soon to be added.
