@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import calculateCartItems from "@/helpers/calculateCartItems";
 
-import CartContext from "@/context/CartContext";
+import { CartContext } from "@/context/CartContext";
 
 const NavBar = () => {
   const { cartProduct } = useContext(CartContext);

@@ -6,7 +6,7 @@ import ProductCard from "./components/ProductCard";
 
 import modifyCart from "@/helpers/modifyCart";
 
-import CartContext from "@/context/CartContext";
+import { CartContext } from "@/context/CartContext";
 
 import { BASE_PRODUCT_URL } from "@/constants";
 

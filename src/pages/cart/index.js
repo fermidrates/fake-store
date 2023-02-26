@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import calculateCartItems from "@/helpers/calculateCartItems";
 import modifyCart from "@/helpers/modifyCart";
 
-import CartContext from "@/context/CartContext";
+import { CartContext } from "@/context/CartContext";
 
 const Cart = () => {
   const { cartProduct, setCartProduct } = useContext(CartContext);
