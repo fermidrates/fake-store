@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import Head from "next/head";
 
 import NavBar from "./components/NavBar";
@@ -10,23 +10,17 @@ import CartContext from "@/context/cartContext";
 
 import { BASE_PRODUCT_URL } from "@/constants";
 
-const Home = () => {
-  const { cartProduct, setCartProduct } = useContext(CartContext);
+export const getStaticProps = async () => {
+  const res = await fetch(BASE_PRODUCT_URL);
+  const data = await res.json();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [products, setProducts] = useState([]);
-
-  const getProducts = async () => {
-    setIsLoading(true);
-    const res = await fetch(BASE_PRODUCT_URL);
-    const data = await res.json();
-    setProducts(data);
-    setIsLoading(false);
+  return {
+    props: { products: data },
   };
+};
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+const Home = ({ products }) => {
+  const { cartProduct, setCartProduct } = useContext(CartContext);
 
   const handleAddToCart = (e, id) => {
     e.stopPropagation();
@@ -35,11 +29,6 @@ const Home = () => {
     setCartProduct(modifiedCart);
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center p-24 text-xl">Please wait..</div>
-    );
-  }
   return (
     <div className="flex flex-col lg:flex-row lg:h-full">
       <Head>
@@ -51,7 +40,7 @@ const Home = () => {
       <NavBar />
       <main>
         <div className="p-4 grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-          {products?.map((product) => {
+          {products.map((product) => {
             return (
               <div key={product.id}>
                 <ProductCard

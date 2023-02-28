@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
 import NavBar from "./components/NavBar";
+import ProductCard from "./components/ProductCard";
 
 import modifyCart from "@/helpers/modifyCart";
 
@@ -37,6 +38,20 @@ export const getStaticProps = async (context) => {
 
 const Product = ({ product }) => {
   const { cartProduct, setCartProduct } = useContext(CartContext);
+
+  const [relatedProduct, setRelatedProduct] = useState([]);
+
+  const getRelatedProducts = async () => {
+    const res = await fetch(
+      BASE_PRODUCT_URL + "/category" + `/${product.category}`
+    );
+    const data = await res.json();
+    setRelatedProduct(data);
+  };
+
+  useEffect(() => {
+    getRelatedProducts();
+  }, []);
 
   const handleAddToCart = () => {
     const modifiedCart = modifyCart(cartProduct, product);
@@ -78,6 +93,18 @@ const Product = ({ product }) => {
               </button>
             </div>
           </div>
+        </div>
+
+        <div className="flex">
+          {relatedProduct.map((product) => {
+            return (
+              <ProductCard
+                data={product}
+                withCartButton={false}
+                onButtonClick={() => {}}
+              />
+            );
+          })}
         </div>
       </main>
     </div>
