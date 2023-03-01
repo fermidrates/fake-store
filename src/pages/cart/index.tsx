@@ -3,15 +3,17 @@ import Image from "next/image";
 
 import NavBar from "../components/NavBar";
 
-import calculateCartItems from "@/helpers/calculateCartItems";
-import modifyCart from "@/helpers/modifyCart";
+import calculateCartItems from "../../helpers/calculateCartItems";
+import modifyCart from "../../helpers/modifyCart";
 
-import CartContext from "@/context/cartContext";
+import { CartProductType } from "../../types";
+
+import CartContext from "../../context/cartContext";
 
 const Cart = () => {
   const { cartProduct, setCartProduct } = useContext(CartContext);
 
-  const handleQuantityChange = (index, action) => {
+  const handleQuantityChange = (index: number, action: "add" | "subtract") => {
     const chosenProduct = cartProduct[index];
     const modifiedCart = modifyCart(cartProduct, chosenProduct, action);
     setCartProduct(modifiedCart);
@@ -26,7 +28,7 @@ const Cart = () => {
         </div>
       ) : (
         <main className="flex flex-1 flex-col">
-          {cartProduct?.map((product, index) => {
+          {cartProduct.map((product: CartProductType, index: number) => {
             return (
               <div
                 key={index}

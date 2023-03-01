@@ -4,11 +4,13 @@ import Image from "next/image";
 import NavBar from "./components/NavBar";
 import ProductCard from "./components/ProductCard";
 
-import modifyCart from "@/helpers/modifyCart";
+import modifyCart from "../helpers/modifyCart";
 
-import CartContext from "@/context/cartContext";
+import { ProductType } from "../types";
 
-import { BASE_PRODUCT_URL } from "@/constants";
+import CartContext from "../context/cartContext";
+
+import { BASE_PRODUCT_URL } from "../constants";
 
 export const getStaticPaths = async () => {
   const res = await fetch(BASE_PRODUCT_URL);
@@ -32,21 +34,23 @@ export const getStaticProps = async (context) => {
   const data = await res.json();
 
   return {
-    props: { product: data },
+    props: { id, product: data },
   };
 };
 
-const Product = ({ product }) => {
+const Product = ({ id, product }) => {
   const { cartProduct, setCartProduct } = useContext(CartContext);
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
+  const [relatedProduct, setRelatedProduct] = useState<ProductType[]>([]);
 
   const getRelatedProducts = async () => {
     const res = await fetch(
       BASE_PRODUCT_URL + "/category" + `/${product.category}`
     );
     const data = await res.json();
-    setRelatedProduct(data);
+    const filteredData = data.filter((datum: ProductType) => datum.id !== +id);
+
+    setRelatedProduct(filteredData);
   };
 
   useEffect(() => {
@@ -95,16 +99,19 @@ const Product = ({ product }) => {
           </div>
         </div>
 
-        <div className="flex">
-          {relatedProduct.map((product) => {
-            return (
-              <ProductCard
-                data={product}
-                withCartButton={false}
-                onButtonClick={() => {}}
-              />
-            );
-          })}
+        <div>
+          You might want to see these products
+          <div className="flex">
+            {relatedProduct.map((product: ProductType) => {
+              return (
+                <ProductCard
+                  data={product}
+                  withCartButton={false}
+                  onButtonClick={() => {}}
+                />
+              );
+            })}
+          </div>
         </div>
       </main>
     </div>

@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-import CartContext from "@/context/cartContext";
+import { CartProductType } from "../types";
 
-import "@/styles/globals.css";
+import CartContext from "../context/cartContext";
+
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
-  const [cartProduct, setCartProduct] = useState([]);
+  const [cartProduct, setCartProduct] = useState<CartProductType[]>([]);
 
   return (
     <CartContext.Provider value={{ cartProduct, setCartProduct }}>

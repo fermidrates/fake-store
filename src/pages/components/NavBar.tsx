@@ -2,9 +2,9 @@ import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import calculateCartItems from "@/helpers/calculateCartItems";
+import calculateCartItems from "../../helpers/calculateCartItems";
 
-import CartContext from "@/context/cartContext";
+import CartContext from "../../context/cartContext";
 
 const NavBar = () => {
   const { cartProduct } = useContext(CartContext);

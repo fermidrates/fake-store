@@ -1,14 +1,16 @@
-import { useContext } from "react";
+import { useContext, MouseEvent } from "react";
 import Head from "next/head";
 
 import NavBar from "./components/NavBar";
 import ProductCard from "./components/ProductCard";
 
-import modifyCart from "@/helpers/modifyCart";
+import modifyCart from "../helpers/modifyCart";
 
-import CartContext from "@/context/cartContext";
+import { ProductType } from "../types";
 
-import { BASE_PRODUCT_URL } from "@/constants";
+import CartContext from "../context/cartContext";
+
+import { BASE_PRODUCT_URL } from "../constants";
 
 export const getStaticProps = async () => {
   const res = await fetch(BASE_PRODUCT_URL);
@@ -22,9 +24,11 @@ export const getStaticProps = async () => {
 const Home = ({ products }) => {
   const { cartProduct, setCartProduct } = useContext(CartContext);
 
-  const handleAddToCart = (e, id) => {
+  const handleAddToCart = (e: MouseEvent<HTMLInputElement>, id: number) => {
     e.stopPropagation();
-    const chosenProduct = products.find((product) => product.id === id);
+    const chosenProduct = products.find(
+      (product: ProductType) => product.id === id
+    );
     const modifiedCart = modifyCart(cartProduct, chosenProduct);
     setCartProduct(modifiedCart);
   };
@@ -40,7 +44,7 @@ const Home = ({ products }) => {
       <NavBar />
       <main>
         <div className="p-4 grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-          {products.map((product) => {
+          {products.map((product: ProductType) => {
             return (
               <div key={product.id}>
                 <ProductCard
