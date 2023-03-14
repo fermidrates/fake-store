@@ -99,9 +99,9 @@ const Product = ({ id, product }) => {
           </div>
         </div>
 
-        <div>
+        <div className="lg: m-8">
           You might want to see these products
-          <div className="flex">
+          <div className="flex gap-2 overflow-x-auto">
             {relatedProduct.map((product: ProductType) => {
               return (
                 <ProductCard
